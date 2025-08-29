@@ -1,0 +1,39 @@
+name: CMake Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ libgtest-dev
+        sudo cmake -S /usr/src/gtest -B /usr/src/gtest/build
+        sudo cmake --build /usr/src/gtest/build
+        sudo cmake --install /usr/src/gtest/build
+
+
+    - name: CMake
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+
+    - name: Build
+      run: |
+        cd build
+        make
+
+    - name: Run Tests
+      run: |
+        cd build
+        ctest --output-on-failure

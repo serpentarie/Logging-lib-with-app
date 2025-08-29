@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     if (argc != 3)
     {
         std::cerr << "Enter: " << argv[0] << " [filename] [default level]" << std::endl;
-        std::cerr << "Default level variety: ERROR, WARNING, INFO" << std::endl;
+        std::cerr << "Level variety: ERROR, WARNING, INFO" << std::endl;
         return 1;
     }
 
